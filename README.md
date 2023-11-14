@@ -11,6 +11,15 @@ https://github.com/localstack/awscli-local
 https://github.com/localstack/helm-charts/blob/main/charts/localstack/values.yaml
 ```
 
+## ssh ubuntu_kind
+```
+k get pods -o wide
+k get nodes -o wide
+export AWS_ENDPOINT_URL=http://172.18.0.4:31566
+awslocal s3api create-bucket --bucket testwebsite
+awslocal s3api list-buckets
+```
+
 ## /etc/hosts
 ```
 cat << EOF >> /etc/hosts

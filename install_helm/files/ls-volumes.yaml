@@ -12,7 +12,7 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    path: /var/nfs/elk
+    path: /var/nfs/localstack
     server: 192.168.56.200
   storageClassName: ""
 ---

@@ -27,7 +27,7 @@ Vagrant.configure('2') do |config|
         end
     end
     config.vm.define 'ubuntu_kind' do |ubuntu_kind|
-        ubuntu_kind.vm.box = 'ubuntu/lunar64'
+        ubuntu_kind.vm.box = 'ubuntu/focal64'
         ubuntu_kind.vm.hostname = 'ubuntu-kind.fks.lab'
         ubuntu_kind.vm.network 'private_network', ip: ENV['UBUNTU_KIND_IP']
         ubuntu_kind.vm.provision 'shell', inline: 'sudo timedatectl set-timezone $TZ', env: {"TZ" => ENV['TIMEZONE']}
@@ -37,7 +37,7 @@ Vagrant.configure('2') do |config|
         ubuntu_kind.vm.provision 'shell', inline: '[ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/$KV/kind-linux-amd64', env: {"KV" => ENV['KIND_VERSION']}
         ubuntu_kind.vm.provision 'shell', inline: <<-SHELL
             apt update
-            apt install -y git bash-completion nfs-common python3-pip awscli
+            apt install -y git bash-completion nfs-common python3-pip
             curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
             chmod +x kubectl && sudo mv kubectl /usr/local/bin/
             kubectl completion bash | sudo tee /etc/bash_completion.d/kubectl > /dev/null
@@ -55,7 +55,7 @@ Vagrant.configure('2') do |config|
             curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 > /tmp/install-helm.sh
             chmod u+x /tmp/install-helm.sh
             bash /tmp/install-helm.sh
-            helm repo add localstack https://localstack.github.io/helm-charts
+            helm repo add localstack-repo https://helm.localstack.cloud
             helm repo update
             git clone https://github.com/ahmetb/kubectx /opt/kubectx
             ln -s /opt/kubectx/kubectx /usr/local/bin/kubectx
@@ -64,9 +64,9 @@ Vagrant.configure('2') do |config|
             kubectl create ns awslocal
             kubectl -n awslocal apply -f /vagrant/files/ls-volumes.yaml
             helm upgrade --install awslocal localstack-repo/localstack --version "$(cat /tmp/localstack_version)" --values /vagrant/files/ls-values.yaml --namespace awslocal
-            #kubectl -n awslocal apply -f /vagrant/files/ls-ing.yaml
-            pip3 install awscli --break-system-packages
-            pip3 install awscli-local --break-system-packages
+            pip3 install localstack
+            pip3 install awscli
+            pip3 install awscli-local
         SHELL
         ubuntu_kind.vm.provider 'virtualbox' do |vb|
             vb.memory = 12288

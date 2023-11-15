@@ -13,7 +13,7 @@ Vagrant.configure('2') do |config|
         ubuntu_nfs.vm.provision 'shell', inline: 'echo "$IP ubuntu-nfs.fks.lab" >> /etc/hosts', env: {"IP" => ENV['UBUNTU_NFS_IP']}
         ubuntu_nfs.vm.provision 'shell', inline: <<-SHELL
             apt update
-            apt install -y git nfs-kernel-server
+            apt install -y git nfs-kernel-server tree
             mkdir /var/nfs/localstack/storage -p
             echo '/var/nfs/localstack 192.168.56.0/24(rw,sync,no_subtree_check)' >> /etc/exports
             exportfs -ar

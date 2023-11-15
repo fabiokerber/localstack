@@ -17,7 +17,7 @@ https://github.com/localstack/helm-charts/blob/main/charts/localstack/values.yam
 kubens awslocal
 k get pods -o wide
 k get nodes -o wide
-export AWS_ENDPOINT_URL=http://172.18.0.4:31566
+export AWS_ENDPOINT_URL=http://<node IP>:31566
 export AWS_ACCESS_KEY_ID=anything
 export AWS_SECRET_ACCESS_KEY=anything
 awslocal s3api create-bucket --bucket testwebsite

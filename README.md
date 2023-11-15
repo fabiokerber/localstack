@@ -28,6 +28,10 @@ tflocal init
 tflocal plan
 tflocal apply -auto-approve
 awslocal ec2 describe-instances --region="us-east-1" --filters "Name=instance-type,Values=t3.nano" --query "Reservations[].Instances[].InstanceId"
+cd /vagrant/files/dynamodb/
+tflocal init
+tflocal plan
+tflocal apply -auto-approve
 ```
 
 ## /etc/hosts

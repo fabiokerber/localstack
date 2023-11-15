@@ -4,3 +4,4 @@
 temp
 .terraform*
 terraform.tfstate
+localstack_providers_override.tf

@@ -23,10 +23,10 @@ export AWS_SECRET_ACCESS_KEY=anything
 awslocal s3api create-bucket --bucket testwebsite
 awslocal s3api list-buckets
 awslocal s3 ls
-cd /vagrant/files/ecs2/
+cd /vagrant/files/ec2/
 tflocal init
 tflocal plan
-tflocal tflocal apply -auto-approve
+tflocal apply -auto-approve
 awslocal ec2 describe-instances --region="us-east-1" --filters "Name=instance-type,Values=t3.nano" --query "Reservations[].Instances[].InstanceId"
 ```
 

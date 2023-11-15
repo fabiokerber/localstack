@@ -2,3 +2,5 @@
 *.log
 .$elk.*
 temp
+.terraform*
+terraform.tfstate

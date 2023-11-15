@@ -147,7 +147,7 @@ persistence:
     - ReadWriteOnce
   ## @param persistence.size Persistent Volume size
   ##
-  size: 8Gi
+  size: 20Gi
   ## @param persistence.dataSource Custom PVC data source
   ##
   dataSource: {}

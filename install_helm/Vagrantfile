@@ -37,7 +37,7 @@ Vagrant.configure('2') do |config|
         ubuntu_kind.vm.provision 'shell', inline: '[ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/$KV/kind-linux-amd64', env: {"KV" => ENV['KIND_VERSION']}
         ubuntu_kind.vm.provision 'shell', inline: <<-SHELL
             apt update
-            apt install -y git bash-completion nfs-common python3-pip
+            apt install -y git bash-completion nfs-common python3-pip software-properties-common gnupg2 curl
             curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
             chmod +x kubectl && sudo mv kubectl /usr/local/bin/
             kubectl completion bash | sudo tee /etc/bash_completion.d/kubectl > /dev/null
@@ -67,6 +67,10 @@ Vagrant.configure('2') do |config|
             pip3 install localstack
             pip3 install awscli
             pip3 install awscli-local
+            curl https://apt.releases.hashicorp.com/gpg | gpg --dearmor > hashicorp.gpg
+            install -o root -g root -m 644 hashicorp.gpg /etc/apt/trusted.gpg.d/
+            apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+            apt install terraform -y
         SHELL
         ubuntu_kind.vm.provider 'virtualbox' do |vb|
             vb.memory = 12288

@@ -8,9 +8,7 @@ https://github.com/localstack/awscli-local<br>
 https://docs.localstack.cloud/user-guide/aws/elastic-compute-cloud/<br>
 
 ## Helm Values
-```
-https://github.com/localstack/helm-charts/blob/main/charts/localstack/values.yaml
-```
+https://github.com/localstack/helm-charts/blob/main/charts/localstack/values.yaml<br>
 
 ## vagrant ssh ubuntu_kind
 ```

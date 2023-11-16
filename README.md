@@ -34,12 +34,3 @@ tflocal init
 tflocal plan
 tflocal apply -auto-approve
 ```
-
-## /etc/hosts
-```
-cat << EOF >> /etc/hosts
-192.168.56.180 localstack.fks.lab
-EOF
-```
-
-## Navegador > http://localstack.fks.lab

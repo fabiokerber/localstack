@@ -12,7 +12,7 @@ https://docs.localstack.cloud/user-guide/aws/elastic-compute-cloud/<br>
 https://github.com/localstack/helm-charts/blob/main/charts/localstack/values.yaml
 ```
 
-## ssh ubuntu_kind
+## vagrant ssh ubuntu_kind
 ```
 kubens awslocal
 k get pods -o wide

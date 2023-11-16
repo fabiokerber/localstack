@@ -18,17 +18,18 @@ kubens awslocal
 k get pods -o wide
 k get nodes -o wide
 export AWS_ENDPOINT_URL=http://<node IP>:31566
-export AWS_ACCESS_KEY_ID=anything
-export AWS_SECRET_ACCESS_KEY=anything
+export AWS_ACCESS_KEY_ID="test"
+export AWS_SECRET_ACCESS_KEY="test"
+export AWS_DEFAULT_REGION="us-east-1"
 awslocal s3api create-bucket --bucket testwebsite
 awslocal s3api list-buckets
 awslocal s3 ls
-cd /vagrant/files/ec2/
+cd /root/tf-ec2/
 tflocal init
 tflocal plan
 tflocal apply -auto-approve
 awslocal ec2 describe-instances --region="us-east-1" --filters "Name=instance-type,Values=t3.nano" --query "Reservations[].Instances[].InstanceId"
-cd /vagrant/files/dynamodb/
+cd /root/tf-dynamodb/
 tflocal init
 tflocal plan
 tflocal apply -auto-approve
